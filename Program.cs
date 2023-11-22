@@ -8,7 +8,12 @@ namespace pp
     {
         public void AddInterfaces(object o) 
         {
-            Core.SetInterface(new ConsoleInterface());
+            if (o == null) {
+                Core.SetInterface(new ConsoleInterface());
+            }
+            else {
+                Core.SetInterface(new CommonInterface(o));
+            }
         }
 
         public void AddPlugins()

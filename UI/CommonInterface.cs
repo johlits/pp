@@ -8,7 +8,11 @@ namespace pp.Interfaces
 {
     public class CommonInterface : IInterface
     {
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb;
+
+        public CommonInterface(object o) {
+            sb = (StringBuilder)o;
+        }
 
         public void ClearInput()
         {
@@ -18,11 +22,6 @@ namespace pp.Interfaces
         public void FormatWordColor(List<string> commands, string word)
         {
             return;
-        }
-
-        public string GetHistory()
-        {
-            return sb.ToString();
         }
 
         public string ReadLine()
@@ -56,6 +55,7 @@ namespace pp.Interfaces
             {
                 await Core.FetchMessagesAsync();
                 await Task.Delay(Core.GetRefreshDelay());
+                Console.WriteLine(sb.ToString());
             }
         }
 

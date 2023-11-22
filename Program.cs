@@ -1,11 +1,12 @@
 ﻿using pp.Plugins;
 using pp.Interfaces;
+using System.Text;
 
 namespace pp
 {
     public class Program
     {
-        public void AddInterfaces() 
+        public void AddInterfaces(object output) 
         {
             Core.SetInterface(new ConsoleInterface());
         }
@@ -21,10 +22,10 @@ namespace pp
             return Core.GetInterface();
         }
 
-        public async Task Init(string? user, string? event_name) 
+        public async Task Init(object output = null, string user = null, string event_name = null) 
         {
             Core.ReadConfig(user, event_name);
-            AddInterfaces();
+            AddInterfaces(output);
             AddPlugins();
             Core.DisplayVersion();
             Core.InitializeUserAndEvent();
@@ -36,7 +37,7 @@ namespace pp
         static async Task Main()
         {
             var pp = new Program();
-            await pp.Init(null, null);
+            await pp.Init(new StringBuilder(""));
         }
     }
 }

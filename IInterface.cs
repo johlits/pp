@@ -12,6 +12,5 @@ namespace pp
         void ClearInput();
         string ReadLine();
         Task Update();
-        string GetHistory();
     }
 }

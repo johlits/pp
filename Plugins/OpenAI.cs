@@ -2,6 +2,8 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
+using pp.Interfaces;
+
 namespace pp.Plugins
 {
     internal class OpenAI : IPlugin

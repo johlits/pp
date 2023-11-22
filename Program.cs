@@ -1,8 +1,9 @@
 ﻿using pp.Plugins;
+using pp.Interfaces;
 
 namespace pp
 {
-    class Program
+    public class Program
     {
         static void AddInterfaces() 
         {
@@ -15,8 +16,7 @@ namespace pp
             Core.AddPlugin(new Help());
         }
 
-        static async Task Main()
-        {
+        public static async Task Init() {
             Core.ReadConfig();
             AddInterfaces();
             AddPlugins();
@@ -25,6 +25,11 @@ namespace pp
             Core.DisplayUserAndEvent();
             Core.DisplayInput();
             await Core.GetInterface().Update();
+        }
+
+        static async Task Main()
+        {
+            await Init();
         }
     }
 }

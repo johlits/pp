@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 
+using pp.Interfaces;
+
 namespace pp.Plugins
 {
     internal class Game : IPlugin

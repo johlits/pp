@@ -2,6 +2,8 @@
 using System.Text.Json;
 using System.Net;
 
+using pp.Interfaces;
+
 namespace pp
 {
     static class Core

@@ -2,9 +2,9 @@ using System.Reflection;
 using System.Text.Json;
 using System.Net;
 
-namespace pp.Plugins
+namespace pp.Interfaces
 {
-    internal class ConsoleInterface : IInterface
+    public class ConsoleInterface : IInterface
     {
         public async Task CheckForInput()
         {

@@ -8,10 +8,11 @@ namespace pp.Interfaces
 {
     public class CommonInterface : IInterface
     {
-        StringBuilder sb;
+        List<string> chats;
+        string line;
 
         public CommonInterface(object o) {
-            sb = (StringBuilder)o;
+            chats = (List<string>)o;
         }
 
         public void ClearInput()
@@ -60,18 +61,18 @@ namespace pp.Interfaces
             {
                 await Core.FetchMessagesAsync();
                 await Task.Delay(Core.GetRefreshDelay());
-                Console.WriteLine(sb.ToString());
             }
         }
 
         public void Write(string line)
         {
-            sb.Append(line);
+            this.line += line;
         }
 
         public void WriteLine(string line)
         {
-            sb.AppendLine(line);
+            chats.Add(this.line + line);
+            this.line = "";
         }
     }
 }

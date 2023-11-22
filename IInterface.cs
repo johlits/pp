@@ -10,6 +10,7 @@ namespace pp
         void Write(string line);
         void WriteLine(string line);
         void ClearInput();
+        void DisplayInput();
         string ReadLine();
         Task Update();
     }

@@ -176,5 +176,10 @@ namespace pp.Interfaces
             ClearLines(GetInputLines());
             Core.SetInput("");
         }
+
+        public void DisplayInput()
+        {
+            Write($"{Core.getUserAlias()}: {Core.GetInput()}");
+        }
     }
 }

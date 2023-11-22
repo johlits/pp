@@ -147,8 +147,6 @@ namespace pp
             }
         }
 
-        public static void DisplayInput() => ui.Write($"{userAlias}: {input}");
-
         public static string Prompt(string prompt)
         {
             ui.Write(prompt);
@@ -243,7 +241,7 @@ namespace pp
             ui.WriteLine("");
             //ui.ClearLines(1);
 
-            DisplayInput();
+            ui.DisplayInput();
             isBlockingInput = false;
         }
 

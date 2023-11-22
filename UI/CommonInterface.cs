@@ -19,6 +19,11 @@ namespace pp.Interfaces
             return;
         }
 
+        public void DisplayInput()
+        {
+            return;
+        }
+
         public void FormatWordColor(List<string> commands, string word)
         {
             return;

@@ -176,5 +176,10 @@ namespace pp.Interfaces
             ClearLines(GetInputLines());
             Core.SetInput("");
         }
+
+        public string GetHistory()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

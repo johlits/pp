@@ -1,6 +1,6 @@
 namespace pp
 {
-    internal interface IInterface
+    public interface IInterface
     {
         void SetH1Color();
         void SetH2Color();
@@ -12,5 +12,6 @@ namespace pp
         void ClearInput();
         string ReadLine();
         Task Update();
+        string GetHistory();
     }
 }

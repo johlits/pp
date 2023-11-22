@@ -178,7 +178,7 @@ namespace pp
             }
         }
 
-        public static void ReadConfig()
+        public static void ReadConfig(string? user, string? event_name)
         {
             string filePath = "config.cfg";
 
@@ -208,6 +208,13 @@ namespace pp
                 {
                     ui.WriteLine($"Error reading config file: {ex.Message}");
                 }
+            }
+
+            if (user != null) {
+                userAlias = user;
+            }
+            if (event_name != null) {
+                eventTitle = event_name;
             }
         }
 

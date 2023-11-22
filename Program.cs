@@ -5,19 +5,25 @@ namespace pp
 {
     public class Program
     {
-        static void AddInterfaces() 
+        public void AddInterfaces() 
         {
             Core.SetInterface(new ConsoleInterface());
         }
 
-        static void AddPlugins()
+        public void AddPlugins()
         {
             Core.AddPlugin(new Quit());
             Core.AddPlugin(new Help());
         }
 
-        public async Task Init() {
-            Core.ReadConfig();
+        public IInterface GetUI() 
+        {
+            return Core.GetInterface();
+        }
+
+        public async Task Init(string? user, string? event_name) 
+        {
+            Core.ReadConfig(user, event_name);
             AddInterfaces();
             AddPlugins();
             Core.DisplayVersion();
@@ -30,7 +36,7 @@ namespace pp
         static async Task Main()
         {
             var pp = new Program();
-            await pp.Init();
+            await pp.Init(null, null);
         }
     }
 }

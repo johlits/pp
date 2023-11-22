@@ -6,7 +6,7 @@ namespace pp
 {
     public class Program
     {
-        public void AddInterfaces(object output) 
+        public void AddInterfaces(object o) 
         {
             Core.SetInterface(new ConsoleInterface());
         }
@@ -37,7 +37,7 @@ namespace pp
         static async Task Main()
         {
             var pp = new Program();
-            await pp.Init(new StringBuilder(""));
+            await pp.Init();
         }
     }
 }

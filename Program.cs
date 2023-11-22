@@ -16,7 +16,7 @@ namespace pp
             Core.AddPlugin(new Help());
         }
 
-        public static async Task Init() {
+        public async Task Init() {
             Core.ReadConfig();
             AddInterfaces();
             AddPlugins();
@@ -29,7 +29,8 @@ namespace pp
 
         static async Task Main()
         {
-            await Init();
+            var pp = new Program();
+            await pp.Init();
         }
     }
 }

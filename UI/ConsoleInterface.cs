@@ -58,7 +58,7 @@ namespace pp.Interfaces
             if (!Core.GetIsBlockingInput())
             {
                 ClearLines(GetInputLines(offset));
-                Core.DisplayInput();
+                DisplayInput();
             }
         }
 

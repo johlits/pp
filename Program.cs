@@ -35,7 +35,7 @@ namespace pp
             Core.DisplayVersion();
             Core.InitializeUserAndEvent();
             Core.DisplayUserAndEvent();
-            Core.DisplayInput();
+            Core.GetInterface().DisplayInput();
             await Core.GetInterface().Update();
         }
 

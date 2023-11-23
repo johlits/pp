@@ -163,7 +163,7 @@ namespace pp
                 ui.SetH1Color();
                 ui.Write($"{userAlias}");
                 ui.ResetColor();
-                ui.Write($"!\n");
+                ui.WriteLine($"!");
             }
         }
 

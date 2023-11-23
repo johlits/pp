@@ -30,20 +30,7 @@ namespace pp.Interfaces
             var offset = 0;
             if (key.Key == ConsoleKey.Enter)
             {
-                bool pluginActivated = false;
-                foreach (var plugin in Core.GetPlugins())
-                {
-                    if (plugin.ActivatesOn(Core.GetInput()))
-                    {
-                        pluginActivated = true;
-                        plugin.Execute(Core.GetInput());
-                    }
-                }
-
-                if (!pluginActivated)
-                {
-                    _ = Core.SendMessageAsync(Core.GetInput(), Core.GetUserAlias());
-                }
+                SendMessage(Core.GetInput());
             }
             else if (key.Key == ConsoleKey.Backspace)
             {
@@ -198,7 +185,20 @@ namespace pp.Interfaces
 
         public void SendMessage(string s)
         {
-            throw new NotImplementedException();
+            bool pluginActivated = false;
+            foreach (var plugin in Core.GetPlugins())
+            {
+                if (plugin.ActivatesOn(s))
+                {
+                    pluginActivated = true;
+                    plugin.Execute(s);
+                }
+            }
+
+            if (!pluginActivated)
+            {
+                _ = Core.SendMessageAsync(s, Core.GetUserAlias());
+            }
         }
     }
 }

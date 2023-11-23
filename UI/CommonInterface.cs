@@ -11,7 +11,8 @@ namespace pp.Interfaces
         List<string> chats;
         string line;
 
-        public CommonInterface(object o) {
+        public CommonInterface(object o)
+        {
             chats = (List<string>)o;
         }
 
@@ -47,7 +48,20 @@ namespace pp.Interfaces
 
         public void SendMessage(string s)
         {
-            _ = Core.SendMessageAsync(s, Core.GetUserAlias());
+            bool pluginActivated = false;
+            foreach (var plugin in Core.GetPlugins())
+            {
+                if (plugin.ActivatesOn(s))
+                {
+                    pluginActivated = true;
+                    plugin.Execute(s);
+                }
+            }
+
+            if (!pluginActivated)
+            {
+                _ = Core.SendMessageAsync(s, Core.GetUserAlias());
+            }
         }
 
         public void SetH1Color()

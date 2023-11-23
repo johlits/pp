@@ -154,15 +154,17 @@ namespace pp
 
         public static void DisplayUserAndEvent()
         {
-            ui.Write($"Welcome to ");
-            ui.SetH1Color();
-            ui.Write($"{eventTitle}");
-            ui.ResetColor();
-            ui.Write($", ");
-            ui.SetH1Color();
-            ui.Write($"{userAlias}");
-            ui.ResetColor();
-            ui.Write($"!\n");
+            if (eventTitle != null && userAlias != null) {
+                ui.Write($"Welcome to ");
+                ui.SetH1Color();
+                ui.Write($"{eventTitle}");
+                ui.ResetColor();
+                ui.Write($", ");
+                ui.SetH1Color();
+                ui.Write($"{userAlias}");
+                ui.ResetColor();
+                ui.Write($"!\n");
+            }
         }
 
         public static void ReadConfig(string? user, string? event_name)

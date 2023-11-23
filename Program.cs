@@ -27,7 +27,7 @@ namespace pp
             return Core.GetInterface();
         }
 
-        public async Task Init(object output = null, string user = null, string event_name = null) 
+        public void Init(object output = null, string user = null, string event_name = null) 
         {
             Core.ReadConfig(user, event_name);
             AddInterfaces(output);
@@ -36,13 +36,25 @@ namespace pp
             Core.InitializeUserAndEvent();
             Core.DisplayUserAndEvent();
             Core.GetInterface().DisplayInput();
+        }
+
+        public void SetUserAlias(string alias) {
+            Core.SetUserAlias(alias);
+        }
+
+        public void SetEventTitle(string title) {
+            Core.SetEventTitle(title);
+        }
+
+        public async Task Start() {
             await Core.GetInterface().Update();
         }
 
         static async Task Main()
         {
             var pp = new Program();
-            await pp.Init();
+            pp.Init();
+            await pp.Start();
         }
     }
 }

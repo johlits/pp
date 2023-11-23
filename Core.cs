@@ -48,6 +48,9 @@ namespace pp
         {
             return inputRefreshRate;
         }
+        public static void SetUserAlias(string alias) {
+            userAlias = alias;
+        }
         public static string getUserAlias()
         {
             if (userAlias == null)
@@ -55,6 +58,10 @@ namespace pp
                 throw new Exception();
             }
             return userAlias;
+        }
+
+        public static void SetEventTitle(string title) {
+            eventTitle = title;
         }
 
         public static string getEventTitle()

@@ -41,7 +41,7 @@ namespace pp.Plugins
 
         public async void Execute(string input)
         {
-            Core.DisplayMessage(Core.getUserAlias(), Core.GetInput());
+            Core.DisplayMessage(Core.GetUserAlias(), Core.GetInput());
 
             int indexOfFirstOccurrence = input.IndexOf("@ai ");
             string prompt = input.Remove(indexOfFirstOccurrence, "@ai ".Length);

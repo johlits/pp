@@ -22,7 +22,7 @@ namespace pp.Interfaces
 
         public int GetInputLines(int offset = 0)
         {
-            return ($"{Core.getUserAlias()}: {Core.GetInput()}".Length - 2 + offset) / Console.WindowWidth + 1;
+            return ($"{Core.GetUserAlias()}: {Core.GetInput()}".Length - 2 + offset) / Console.WindowWidth + 1;
         }
 
         public void ProcessKeyPress(ConsoleKeyInfo key)
@@ -42,7 +42,7 @@ namespace pp.Interfaces
 
                 if (!pluginActivated)
                 {
-                    _ = Core.SendMessageAsync(Core.GetInput(), Core.getUserAlias());
+                    _ = Core.SendMessageAsync(Core.GetInput(), Core.GetUserAlias());
                 }
             }
             else if (key.Key == ConsoleKey.Backspace)
@@ -179,7 +179,21 @@ namespace pp.Interfaces
 
         public void DisplayInput()
         {
-            Write($"{Core.getUserAlias()}: {Core.GetInput()}");
+            Write($"{Core.GetUserAlias()}: {Core.GetInput()}");
+        }
+
+        public void InitializeUserAndEvent()
+        {
+            if (Core.GetEventTitle() == null || Core.GetUserAlias() == null)
+            {
+                if (Core.GetEventTitle() == null) {
+                    Core.SetEventTitle(Core.Prompt("Event name: "));
+                }
+                if (Core.GetUserAlias() == null) {
+                    Core.SetUserAlias(Core.Prompt("User name: "));
+                }
+                WriteLine("");
+            }
         }
     }
 }

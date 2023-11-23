@@ -44,12 +44,12 @@ namespace pp.Plugins
 
             if (len == 1 && output[0].ToString() == "game_start")
             {
-                _ = Core.SendMessageAsync($"Game started!", Core.getUserAlias());
+                _ = Core.SendMessageAsync($"Game started!", Core.GetUserAlias());
                 return true;
             }
             else if (len == 2 && output[0].ToString() == "game_end")
             {
-                _ = Core.SendMessageAsync($"Battle report: {output[1]}", Core.getUserAlias());
+                _ = Core.SendMessageAsync($"Battle report: {output[1]}", Core.GetUserAlias());
                 return true;
             }
 
@@ -60,9 +60,9 @@ namespace pp.Plugins
         {
             var formVariables = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string, string>("player_name", Core.getUserAlias()),
+                new KeyValuePair<string, string>("player_name", Core.GetUserAlias()),
                 new KeyValuePair<string, string>("player_action", action),
-                new KeyValuePair<string, string>("event_name", Core.getEventTitle()),
+                new KeyValuePair<string, string>("event_name", Core.GetEventTitle()),
                 new KeyValuePair<string, string>("card_name", cardName),
                 new KeyValuePair<string, string>("can_afford", "0")
             };
@@ -81,7 +81,7 @@ namespace pp.Plugins
                 return;
             }
 
-            Core.DisplayMessage(Core.getUserAlias(), $"{AddSymbolToWords(output[0].Value.ToString(), "@")} | Day {AddSymbolToWords(output[1].Value.ToString(), "@")}/{output[3].Value.ToString()} | {AddSymbolToWords(output[2].Value.ToString(), "@")}s until next day");
+            Core.DisplayMessage(Core.GetUserAlias(), $"{AddSymbolToWords(output[0].Value.ToString(), "@")} | Day {AddSymbolToWords(output[1].Value.ToString(), "@")}/{output[3].Value.ToString()} | {AddSymbolToWords(output[2].Value.ToString(), "@")}s until next day");
         }
 
         public void OutputCards(dynamic output, bool includeCoins)
@@ -97,7 +97,7 @@ namespace pp.Plugins
                 if (first && includeCoins)
                 {
                     first = false;
-                    Core.DisplayMessage(Core.getUserAlias(), $"Coins: !{card}");
+                    Core.DisplayMessage(Core.GetUserAlias(), $"Coins: !{card}");
                     continue;
                 }
 
@@ -117,14 +117,14 @@ namespace pp.Plugins
                     if (property.Name == "golden") golden = property.Value;
                 }
 
-                Core.DisplayMessage(Core.getUserAlias(), $"{AddSymbolToWords(name.ToString(), "#")} ATK {AddSymbolToWords(atk.ToString(), "@")} HP {AddSymbolToWords(hp.ToString(), "@")} COST {AddSymbolToWords(cost.ToString(), "!")} Traits {AddSymbolToWords(traits.ToString(), "@")} {(golden == "1" ? AddSymbolToWords("GOLDEN", "@") : "")}");
+                Core.DisplayMessage(Core.GetUserAlias(), $"{AddSymbolToWords(name.ToString(), "#")} ATK {AddSymbolToWords(atk.ToString(), "@")} HP {AddSymbolToWords(hp.ToString(), "@")} COST {AddSymbolToWords(cost.ToString(), "!")} Traits {AddSymbolToWords(traits.ToString(), "@")} {(golden == "1" ? AddSymbolToWords("GOLDEN", "@") : "")}");
             }
         }
 
         public async void Execute(string input)
         {
             Core.GetInterface().ClearInput();
-            Core.DisplayMessage(Core.getUserAlias(), $"{input}");
+            Core.DisplayMessage(Core.GetUserAlias(), $"{input}");
             dynamic output;
 
             if (input.StartsWith("/pick "))
@@ -143,11 +143,11 @@ namespace pp.Plugins
 
                 if (len == 0)
                 {
-                    Core.DisplayMessage(Core.getUserAlias(), $"Could not pick {AddSymbolToWords(cardName.ToString(), "#")}");
+                    Core.DisplayMessage(Core.GetUserAlias(), $"Could not pick {AddSymbolToWords(cardName.ToString(), "#")}");
                 }
                 else
                 {
-                    _ = Core.SendMessageAsync($"Picked {AddSymbolToWords(output[0].Value.ToString(), "#")}", Core.getUserAlias());
+                    _ = Core.SendMessageAsync($"Picked {AddSymbolToWords(output[0].Value.ToString(), "#")}", Core.GetUserAlias());
                 }
             }
             else
@@ -155,11 +155,11 @@ namespace pp.Plugins
                 switch (input)
                 {
                     case "/traits":
-                        Core.DisplayMessage(Core.getUserAlias(), "https://palplanner.com/cardgame/traits.php");
+                        Core.DisplayMessage(Core.GetUserAlias(), "https://palplanner.com/cardgame/traits.php");
                         break;
 
                     case "/history":
-                        Core.DisplayMessage(Core.getUserAlias(), $"https://palplanner.com/cardgame/history.php?event={Core.getEventTitle().ToLower()}");
+                        Core.DisplayMessage(Core.GetUserAlias(), $"https://palplanner.com/cardgame/history.php?event={Core.GetEventTitle().ToLower()}");
                         break;
 
                     case "/game":

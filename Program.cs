@@ -33,7 +33,7 @@ namespace pp
             AddInterfaces(output);
             AddPlugins();
             Core.DisplayVersion();
-            Core.InitializeUserAndEvent();
+            Core.GetInterface().InitializeUserAndEvent();
             Core.DisplayUserAndEvent();
             Core.GetInterface().DisplayInput();
         }

@@ -14,7 +14,7 @@ namespace pp
         private static int lastDisplayedChatId = -1;
         private static string? serverHost = "https://www.palplanner.com/chat/server.php";
         private static string? eventTitle = null;
-        private static string userAlias = null;
+        private static string? userAlias = null;
         private static int refreshDelay = 0;
         private static int initialRefreshDelay = 1000;
         private static int incrementalRefreshDelay = 1000;
@@ -51,12 +51,8 @@ namespace pp
         public static void SetUserAlias(string alias) {
             userAlias = alias;
         }
-        public static string getUserAlias()
+        public static string GetUserAlias()
         {
-            if (userAlias == null)
-            {
-                throw new Exception();
-            }
             return userAlias;
         }
 
@@ -64,12 +60,8 @@ namespace pp
             eventTitle = title;
         }
 
-        public static string getEventTitle()
+        public static string GetEventTitle()
         {
-            if (eventTitle == null)
-            {
-                throw new Exception();
-            }
             return eventTitle;
         }
 
@@ -171,16 +163,6 @@ namespace pp
             ui.Write($"{userAlias}");
             ui.ResetColor();
             ui.Write($"!\n");
-        }
-
-        public static void InitializeUserAndEvent()
-        {
-            if (eventTitle == null || userAlias == null)
-            {
-                eventTitle ??= Prompt("Event name: ");
-                userAlias ??= Prompt("User name: ");
-                ui.WriteLine("");
-            }
         }
 
         public static void ReadConfig(string? user, string? event_name)

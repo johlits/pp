@@ -22,7 +22,7 @@ namespace pp.Plugins
 
         public void Execute(string input)
         {
-            Core.DisplayMessage(Core.getUserAlias(), string.Join(", ", Core.GetCommands()));
+            Core.DisplayMessage(Core.GetUserAlias(), string.Join(", ", Core.GetCommands()));
             Core.GetInterface().ClearInput();
         }
 

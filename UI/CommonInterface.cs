@@ -30,6 +30,11 @@ namespace pp.Interfaces
             return;
         }
 
+        public void InitializeUserAndEvent()
+        {
+            return;
+        }
+
         public string ReadLine()
         {
             return null;

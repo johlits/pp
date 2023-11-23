@@ -12,6 +12,7 @@ namespace pp
         void ClearInput();
         void DisplayInput();
         string ReadLine();
+        void InitializeUserAndEvent();
         Task Update();
     }
 }

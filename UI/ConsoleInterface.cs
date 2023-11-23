@@ -195,5 +195,10 @@ namespace pp.Interfaces
                 WriteLine("");
             }
         }
+
+        public void SendMessage(string s)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

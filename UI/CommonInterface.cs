@@ -45,6 +45,11 @@ namespace pp.Interfaces
             return;
         }
 
+        public void SendMessage(string s)
+        {
+            _ = Core.SendMessageAsync(s, Core.GetUserAlias());
+        }
+
         public void SetH1Color()
         {
             return;

@@ -6,6 +6,14 @@ namespace pp
 {
     public class Program
     {
+        public void AddPlugins()
+        {
+            Core.AddPlugin(new Quit());
+            Core.AddPlugin(new Help());
+            Core.AddPlugin(new Game());
+            Core.AddPlugin(new OpenAI(""));
+        }
+
         public void AddInterfaces(object o) 
         {
             if (o == null) {
@@ -14,12 +22,6 @@ namespace pp
             else {
                 Core.SetInterface(new CommonInterface(o));
             }
-        }
-
-        public void AddPlugins()
-        {
-            Core.AddPlugin(new Quit());
-            Core.AddPlugin(new Help());
         }
 
         public IInterface GetUI() 

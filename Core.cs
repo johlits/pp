@@ -58,6 +58,7 @@ namespace pp
 
         public static void SetEventTitle(string title) {
             eventTitle = title;
+            lastDisplayedChatId = -1;
         }
 
         public static string GetEventTitle()

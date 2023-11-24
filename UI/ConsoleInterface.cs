@@ -200,5 +200,22 @@ namespace pp.Interfaces
                 _ = Core.SendMessageAsync(s, Core.GetUserAlias());
             }
         }
+
+        public void DisplayVersion()
+        {
+            var version = Assembly.GetEntryAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+
+            SetH1Color();
+            
+
+            WriteLine($"PalPlanner CLI Version: {version}\n");
+            foreach (var plugin in Core.GetPlugins())
+            {
+                SetH2Color();
+                WriteLine($"* {plugin.GetDescription()}");
+            }
+            ResetColor();
+            WriteLine("");
+        }
     }
 }

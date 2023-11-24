@@ -26,6 +26,22 @@ namespace pp.Interfaces
             return;
         }
 
+        public void DisplayVersion()
+        {
+            var version = Assembly.GetEntryAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+
+            SetH1Color();
+            
+            WriteLine($"PalPlanner Common Version: {version}\n");
+            foreach (var plugin in Core.GetPlugins())
+            {
+                SetH2Color();
+                WriteLine($"* {plugin.GetDescription()}");
+            }
+            ResetColor();
+            WriteLine("");
+        }
+
         public void FormatWordColor(List<string> commands, string word)
         {
             return;

@@ -34,8 +34,6 @@ namespace pp
             Core.ReadConfig(user, event_name);
             AddInterfaces(output);
             AddPlugins();
-            Core.DisplayVersion();
-            Core.GetInterface().InitializeUserAndEvent();
         }
 
         public void SetUserAlias(string alias) {
@@ -47,6 +45,8 @@ namespace pp
         }
 
         public async Task Start() {
+            Core.GetInterface().DisplayVersion();
+            Core.GetInterface().InitializeUserAndEvent();
             Core.DisplayUserAndEvent();
             Core.GetInterface().DisplayInput();
             await Core.GetInterface().Update();

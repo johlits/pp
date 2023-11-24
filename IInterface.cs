@@ -14,6 +14,7 @@ namespace pp
         string ReadLine();
         void InitializeUserAndEvent();
         void SendMessage(string s);
+        void DisplayVersion();
         Task Update();
     }
 }

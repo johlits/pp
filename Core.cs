@@ -90,23 +90,6 @@ namespace pp
             }
         }
 
-        public static void DisplayVersion()
-        {
-            var version = Assembly.GetEntryAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
-
-            ui.SetH1Color();
-            
-
-            ui.WriteLine($"PalPlanner CLI Version: {version}\n");
-            foreach (var plugin in plugins)
-            {
-                ui.SetH2Color();
-                ui.WriteLine($"* {plugin.GetDescription()}");
-            }
-            ui.ResetColor();
-            ui.WriteLine("");
-        }
-
         public static string GetFormattedWord(string word)
         {
             if (Uri.TryCreate(word, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))

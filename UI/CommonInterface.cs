@@ -8,12 +8,13 @@ namespace pp.Interfaces
 {
     public class CommonInterface : IInterface
     {
-        List<Tuple<string, int>> chats;
+        List<Tuple<string, string, int>> chats;
         string line;
+        string user;
 
         public CommonInterface(object o)
         {
-            chats = (List<Tuple<string, int>>)o;
+            chats = (List<Tuple<string, string, int>>)o;
         }
 
         public void ClearInput()
@@ -32,14 +33,14 @@ namespace pp.Interfaces
 
             SetH1Color();
             
-            WriteLine($"PalPlanner Common Version: {version}\n");
+            WriteLine($"PalPlanner Common Version: {version}\n", null);
             foreach (var plugin in Core.GetPlugins())
             {
                 SetH2Color();
-                WriteLine($"* {plugin.GetDescription()}");
+                WriteLine($"* {plugin.GetDescription()}", null);
             }
             ResetColor();
-            WriteLine("");
+            WriteLine("", null);
         }
 
         public void FormatWordColor(List<string> commands, string word)
@@ -104,15 +105,22 @@ namespace pp.Interfaces
             }
         }
 
-        public void Write(string line)
+        public void Write(string line, string? prependUser)
         {
             this.line += line;
+            if (prependUser != null) {
+                user = prependUser;
+            }
         }
 
-        public void WriteLine(string line, Core.MC flag = Core.MC.None)
+        public void WriteLine(string line, string? prependUser, Core.MC flag = Core.MC.None)
         {
-            chats.Add(new Tuple<string, int>(this.line + line, (int)flag));
+            if (prependUser != null) {
+                user = prependUser;
+            }
+            chats.Add(new Tuple<string, string, int>(string.IsNullOrEmpty(user) ? "" : user, this.line + line, (int)flag));
             this.line = "";
+            this.user = "";
         }
     }
 }

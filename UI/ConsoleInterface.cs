@@ -77,14 +77,32 @@ namespace pp.Interfaces
             Console.ForegroundColor = color;
         }
 
-        public void Write(string line)
+        public void Write(string line, string? prependUser)
         {
-            Console.Write(line);
+            if (prependUser != null) {
+                SetUserColor(prependUser);
+                Console.Write($"{prependUser}");
+                ResetColor();
+                Console.Write(": ");
+                Console.Write($"{line}");
+            }
+            else {
+                Console.Write($"{line}");
+            }
         }
 
-        public void WriteLine(string line, Core.MC flag = Core.MC.None)
+        public void WriteLine(string line, string? prependUser, Core.MC flag = Core.MC.None)
         {
-            Console.WriteLine(line);
+            if (prependUser != null) {
+                SetUserColor(prependUser);
+                Console.Write($"{prependUser}");
+                ResetColor();
+                Console.Write(": ");
+                Console.WriteLine($"{line}");
+            }
+            else {
+                Console.WriteLine($"{line}");
+            }
         }
 
         public ConsoleColor GetWordColor(List<string> commands, string word)
@@ -166,7 +184,7 @@ namespace pp.Interfaces
 
         public void DisplayInput()
         {
-            Write($"{Core.GetUserAlias()}: {Core.GetInput()}");
+            Write($"{Core.GetInput()}", Core.GetUserAlias());
         }
 
         public void InitializeUserAndEvent()
@@ -179,7 +197,7 @@ namespace pp.Interfaces
                 if (Core.GetUserAlias() == null) {
                     Core.SetUserAlias(Core.Prompt("User name: "));
                 }
-                WriteLine("");
+                WriteLine("", null);
             }
         }
 
@@ -208,14 +226,14 @@ namespace pp.Interfaces
             SetH1Color();
             
 
-            WriteLine($"PalPlanner CLI Version: {version}\n");
+            WriteLine($"PalPlanner CLI Version: {version}\n", null);
             foreach (var plugin in Core.GetPlugins())
             {
                 SetH2Color();
-                WriteLine($"* {plugin.GetDescription()}");
+                WriteLine($"* {plugin.GetDescription()}", null);
             }
             ResetColor();
-            WriteLine("");
+            WriteLine("", null);
         }
     }
 }

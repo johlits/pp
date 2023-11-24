@@ -145,22 +145,22 @@ namespace pp
 
         public static string Prompt(string prompt)
         {
-            ui.Write(prompt);
+            ui.Write(prompt, null);
             return ui.ReadLine();
         }
 
         public static void DisplayUserAndEvent()
         {
             if (eventTitle != null && userAlias != null) {
-                ui.Write($"Welcome to ");
+                ui.Write($"Welcome to ", null);
                 ui.SetH1Color();
-                ui.Write($"{eventTitle}");
+                ui.Write($"{eventTitle}", null);
                 ui.ResetColor();
-                ui.Write($", ");
+                ui.Write($", ", null);
                 ui.SetH1Color();
-                ui.Write($"{userAlias}");
+                ui.Write($"{userAlias}", null);
                 ui.ResetColor();
-                ui.WriteLine($"!");
+                ui.WriteLine($"!", null);
             }
         }
 
@@ -193,7 +193,7 @@ namespace pp
                 }
                 catch (Exception ex)
                 {
-                    ui.WriteLine($"Error reading config file: {ex.Message}");
+                    ui.WriteLine($"Error reading config file: {ex.Message}", null);
                 }
             }
 
@@ -214,20 +214,17 @@ namespace pp
 
             if (user != null)
             {
-                ui.SetUserColor(user);
-                ui.Write($"{user}");
-                ui.ResetColor();
-                ui.Write($": ");
+                ui.Write("", user);
             }
 
             foreach (var word in message.Split(" "))
             {
                 ui.FormatWordColor(GetCommands(), word);
-                ui.Write(GetFormattedWord(word));
+                ui.Write(GetFormattedWord(word), null);
                 ui.ResetColor();
             }
 
-            ui.WriteLine("", flag);
+            ui.WriteLine("", null, flag);
             //ui.ClearLines(1);
 
             ui.DisplayInput();

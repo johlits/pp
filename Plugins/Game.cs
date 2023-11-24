@@ -124,7 +124,7 @@ namespace pp.Plugins
         public async void Execute(string input)
         {
             Core.GetInterface().ClearInput();
-            Core.DisplayMessage(Core.MC.Game, Core.GetUserAlias(), $"{input}");
+            Core.DisplayMessage(Core.MC.None, Core.GetUserAlias(), $"{input}");
             dynamic output;
 
             if (input.StartsWith("/pick "))

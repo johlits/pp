@@ -6,6 +6,8 @@ namespace pp.Interfaces
 {
     public class ConsoleInterface : IInterface
     {
+        int chatCount = 0;
+
         public async Task CheckForInput()
         {
             while (true)
@@ -103,6 +105,7 @@ namespace pp.Interfaces
             else {
                 Console.WriteLine($"{line}");
             }
+            chatCount++;
         }
 
         public ConsoleColor GetWordColor(List<string> commands, string word)
@@ -163,6 +166,11 @@ namespace pp.Interfaces
         public void SetUserColor(string name)
         {
             SetForegroundColor(GetUserColor(name));
+        }
+
+        public int GetChatCount()
+        {
+            return chatCount;
         }
 
         public async Task Update()

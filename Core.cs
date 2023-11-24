@@ -23,6 +23,7 @@ namespace pp
         private static List<string> ignoredUsers = new List<string>();
         private static List<IPlugin> plugins = new List<IPlugin>();
         private static List<string> commands = new List<string>();
+        private static bool firstFetch = false;
         private static IInterface ui;
         private static Dictionary<string, string> secrets = new Dictionary<string, string>();
         public enum MC : int
@@ -34,6 +35,9 @@ namespace pp
 
         public static IInterface GetInterface() {
             return ui;
+        }
+        public static bool GetFirstFetch() {
+            return firstFetch;
         }
 
         public static void SetInterface(IInterface ui) {
@@ -275,6 +279,7 @@ namespace pp
                                 if (!ignoredUsers.Contains(username)) DisplayMessage(MC.None, username, chat);
                             }
                         }
+                        firstFetch = true;
                     }
                     else
                     {

@@ -15,6 +15,7 @@ namespace pp
         void InitializeUserAndEvent();
         void SendMessage(string s);
         void DisplayVersion();
+        int GetChatCount();
         Task Update();
     }
 }

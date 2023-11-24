@@ -11,6 +11,7 @@ namespace pp.Interfaces
         List<Tuple<string, string, int>> chats;
         string line;
         string user;
+        int chatCount = 0;
 
         public CommonInterface(object o)
         {
@@ -46,6 +47,11 @@ namespace pp.Interfaces
         public void FormatWordColor(List<string> commands, string word)
         {
             return;
+        }
+
+        public int GetChatCount()
+        {
+            return chatCount;
         }
 
         public void InitializeUserAndEvent()
@@ -121,6 +127,7 @@ namespace pp.Interfaces
             chats.Add(new Tuple<string, string, int>(string.IsNullOrEmpty(user) ? "" : user, this.line + line, (int)flag));
             this.line = "";
             this.user = "";
+            chatCount++;
         }
     }
 }

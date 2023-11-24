@@ -43,6 +43,12 @@ namespace pp
         public void SetEventTitle(string title) {
             Core.SetEventTitle(title);
         }
+        public bool FirstFetch() {
+            return Core.GetFirstFetch();
+        }
+        public int ChatCount() {
+            return Core.GetInterface().GetChatCount();
+        }
 
         public async Task Start() {
             Core.GetInterface().DisplayVersion();

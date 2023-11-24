@@ -34,5 +34,10 @@ namespace pp.Plugins
         {
             return;
         }
+
+        public string GetPluginName()
+        {
+            return "quit";
+        }
     }
 }

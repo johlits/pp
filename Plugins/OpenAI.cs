@@ -10,12 +10,17 @@ namespace pp.Plugins
     {
         private static readonly HttpClient _httpClient = new HttpClient { BaseAddress = new Uri("https://api.openai.com/v1/") };
 
-        private readonly string _apiKey;
-
-        public OpenAI(string apiKey)
+        public OpenAI(string? apiKey = null)
         {
-            _apiKey = apiKey;
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+            if (!string.IsNullOrEmpty(apiKey)) {
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+            }
+            else {
+                apiKey = Core.GetSecret("openaikey");
+                if (!string.IsNullOrEmpty(apiKey)) {
+                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+                }
+            }
         }
 
         public async Task<string> SendPrompt(string prompt, string model)
@@ -41,7 +46,7 @@ namespace pp.Plugins
 
         public async void Execute(string input)
         {
-            Core.DisplayMessage(Core.GetUserAlias(), Core.GetInput());
+            Core.DisplayMessage(Core.MC.None, Core.GetUserAlias(), Core.GetInput());
 
             int indexOfFirstOccurrence = input.IndexOf("@ai ");
             string prompt = input.Remove(indexOfFirstOccurrence, "@ai ".Length);
@@ -66,6 +71,11 @@ namespace pp.Plugins
         public void Ping(int no)
         {
             return;
+        }
+
+        public string GetPluginName()
+        {
+            return "openai";
         }
     }
 }

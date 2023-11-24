@@ -6,7 +6,7 @@ using pp.Interfaces;
 
 namespace pp
 {
-    static class Core
+    public static class Core
     {
         private static string input = string.Empty;
         private static bool isBlockingInput = false;
@@ -24,6 +24,13 @@ namespace pp
         private static List<IPlugin> plugins = new List<IPlugin>();
         private static List<string> commands = new List<string>();
         private static IInterface ui;
+        private static Dictionary<string, string> secrets = new Dictionary<string, string>();
+        public enum MC : int
+        {
+            None = 0,
+            Normal = 1,
+            Game = 2
+        }
 
         public static IInterface GetInterface() {
             return ui;
@@ -31,6 +38,12 @@ namespace pp
 
         public static void SetInterface(IInterface ui) {
             Core.ui = ui;
+        }
+        public static string? GetSecret(string key) {
+            if (secrets.ContainsKey(key)) {
+                return secrets[key];
+            }
+            return null;
         }
         public static bool GetIsBlockingInput() 
         {
@@ -120,12 +133,12 @@ namespace pp
                     }
                     else
                     {
-                        DisplayMessage(null, $"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                        DisplayMessage(MC.None, null, $"Error: {response.StatusCode} - {response.ReasonPhrase}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    DisplayMessage(null, $"Error sending message: {ex.Message}");
+                    DisplayMessage(MC.None, null, $"Error sending message: {ex.Message}");
                 }
             }
         }
@@ -173,6 +186,7 @@ namespace pp
                                 case "incrementalRefresh": incrementalRefreshDelay = int.Parse(parts[1]); break;
                                 case "inputRefresh": inputRefreshRate = int.Parse(parts[1]); break;
                                 case "ignore": ignoredUsers.AddRange(parts[1].Split(",")); break;
+                                case "openaikey": secrets.Add("openaikey", parts[1]); break;
                             }
                         }
                     }
@@ -191,7 +205,7 @@ namespace pp
             }
         }
 
-        public static void DisplayMessage(string? user, string message)
+        public static void DisplayMessage(Core.MC flag, string user, string message)
         {
             message = WebUtility.HtmlDecode(message);
 
@@ -213,7 +227,7 @@ namespace pp
                 ui.ResetColor();
             }
 
-            ui.WriteLine("");
+            ui.WriteLine("", flag);
             //ui.ClearLines(1);
 
             ui.DisplayInput();
@@ -261,18 +275,18 @@ namespace pp
                                 refreshDelay = initialRefreshDelay;
                                 lastDisplayedChatId = Math.Max(lastDisplayedChatId, chatId);
 
-                                if (!ignoredUsers.Contains(username)) DisplayMessage(username, chat);
+                                if (!ignoredUsers.Contains(username)) DisplayMessage(MC.None, username, chat);
                             }
                         }
                     }
                     else
                     {
-                        DisplayMessage(null, $"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                        DisplayMessage(MC.None, null, $"Error: {response.StatusCode} - {response.ReasonPhrase}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    DisplayMessage(null, $"Error fetching messages: {ex.Message}");
+                    DisplayMessage(MC.None, null, $"Error fetching messages: {ex.Message}");
                 }
             }
 

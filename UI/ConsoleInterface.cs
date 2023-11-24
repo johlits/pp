@@ -82,7 +82,7 @@ namespace pp.Interfaces
             Console.Write(line);
         }
 
-        public void WriteLine(string line)
+        public void WriteLine(string line, Core.MC flag = Core.MC.None)
         {
             Console.WriteLine(line);
         }

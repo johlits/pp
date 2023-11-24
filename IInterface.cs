@@ -8,7 +8,7 @@ namespace pp
         void FormatWordColor(List<string> commands, string word);
         void ResetColor();
         void Write(string line);
-        void WriteLine(string line);
+        void WriteLine(string line, Core.MC flag = Core.MC.None);
         void ClearInput();
         void DisplayInput();
         string ReadLine();

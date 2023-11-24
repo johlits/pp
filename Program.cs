@@ -11,7 +11,7 @@ namespace pp
             Core.AddPlugin(new Quit());
             Core.AddPlugin(new Help());
             Core.AddPlugin(new Game());
-            Core.AddPlugin(new OpenAI(""));
+            Core.AddPlugin(new OpenAI());
         }
 
         public void AddInterfaces(object o) 

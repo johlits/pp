@@ -22,7 +22,7 @@ namespace pp.Plugins
 
         public void Execute(string input)
         {
-            Core.DisplayMessage(Core.GetUserAlias(), string.Join(", ", Core.GetCommands()));
+            Core.DisplayMessage(Core.MC.None, Core.GetUserAlias(), string.Join(", ", Core.GetCommands()));
             Core.GetInterface().ClearInput();
         }
 
@@ -34,6 +34,11 @@ namespace pp.Plugins
         public void Ping(int no)
         {
             return;
+        }
+
+        public string GetPluginName()
+        {
+            return "help";
         }
     }
 }

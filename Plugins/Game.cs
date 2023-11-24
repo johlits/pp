@@ -80,8 +80,8 @@ namespace pp.Plugins
             {
                 return;
             }
-
-            Core.DisplayMessage(Core.GetUserAlias(), $"{AddSymbolToWords(output[0].Value.ToString(), "@")} | Day {AddSymbolToWords(output[1].Value.ToString(), "@")}/{output[3].Value.ToString()} | {AddSymbolToWords(output[2].Value.ToString(), "@")}s until next day");
+            var msg = $"{AddSymbolToWords(output[0].Value.ToString(), "@")} | Day {AddSymbolToWords(output[1].Value.ToString(), "@")}/{output[3].Value.ToString()} | {AddSymbolToWords(output[2].Value.ToString(), "@")}s until next day";
+            Core.DisplayMessage(Core.MC.Game, Core.GetUserAlias(), msg);
         }
 
         public void OutputCards(dynamic output, bool includeCoins)
@@ -97,7 +97,7 @@ namespace pp.Plugins
                 if (first && includeCoins)
                 {
                     first = false;
-                    Core.DisplayMessage(Core.GetUserAlias(), $"Coins: !{card}");
+                    Core.DisplayMessage(Core.MC.Game, Core.GetUserAlias(), $"Coins: !{card}");
                     continue;
                 }
 
@@ -117,14 +117,14 @@ namespace pp.Plugins
                     if (property.Name == "golden") golden = property.Value;
                 }
 
-                Core.DisplayMessage(Core.GetUserAlias(), $"{AddSymbolToWords(name.ToString(), "#")} ATK {AddSymbolToWords(atk.ToString(), "@")} HP {AddSymbolToWords(hp.ToString(), "@")} COST {AddSymbolToWords(cost.ToString(), "!")} Traits {AddSymbolToWords(traits.ToString(), "@")} {(golden == "1" ? AddSymbolToWords("GOLDEN", "@") : "")}");
+                Core.DisplayMessage(Core.MC.Game, Core.GetUserAlias(), $"{AddSymbolToWords(name.ToString(), "#")} ATK {AddSymbolToWords(atk.ToString(), "@")} HP {AddSymbolToWords(hp.ToString(), "@")} COST {AddSymbolToWords(cost.ToString(), "!")} Traits {AddSymbolToWords(traits.ToString(), "@")} {(golden == "1" ? AddSymbolToWords("GOLDEN", "@") : "")}");
             }
         }
 
         public async void Execute(string input)
         {
             Core.GetInterface().ClearInput();
-            Core.DisplayMessage(Core.GetUserAlias(), $"{input}");
+            Core.DisplayMessage(Core.MC.Game, Core.GetUserAlias(), $"{input}");
             dynamic output;
 
             if (input.StartsWith("/pick "))
@@ -143,7 +143,7 @@ namespace pp.Plugins
 
                 if (len == 0)
                 {
-                    Core.DisplayMessage(Core.GetUserAlias(), $"Could not pick {AddSymbolToWords(cardName.ToString(), "#")}");
+                    Core.DisplayMessage(Core.MC.Game, Core.GetUserAlias(), $"Could not pick {AddSymbolToWords(cardName.ToString(), "#")}");
                 }
                 else
                 {
@@ -155,11 +155,11 @@ namespace pp.Plugins
                 switch (input)
                 {
                     case "/traits":
-                        Core.DisplayMessage(Core.GetUserAlias(), "https://palplanner.com/cardgame/traits.php");
+                        Core.DisplayMessage(Core.MC.Game, Core.GetUserAlias(), "https://palplanner.com/cardgame/traits.php");
                         break;
 
                     case "/history":
-                        Core.DisplayMessage(Core.GetUserAlias(), $"https://palplanner.com/cardgame/history.php?event={Core.GetEventTitle().ToLower()}");
+                        Core.DisplayMessage(Core.MC.Game, Core.GetUserAlias(), $"https://palplanner.com/cardgame/history.php?event={Core.GetEventTitle().ToLower()}");
                         break;
 
                     case "/game":
@@ -197,6 +197,11 @@ namespace pp.Plugins
                 await _httpClient.PostAsync("bots.php", new FormUrlEncodedContent(formVariables));
             }
             return;
+        }
+
+        public string GetPluginName()
+        {
+            return "game";
         }
     }
 }

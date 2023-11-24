@@ -8,12 +8,12 @@ namespace pp.Interfaces
 {
     public class CommonInterface : IInterface
     {
-        List<string> chats;
+        List<Tuple<string, int>> chats;
         string line;
 
         public CommonInterface(object o)
         {
-            chats = (List<string>)o;
+            chats = (List<Tuple<string, int>>)o;
         }
 
         public void ClearInput()
@@ -109,9 +109,9 @@ namespace pp.Interfaces
             this.line += line;
         }
 
-        public void WriteLine(string line)
+        public void WriteLine(string line, Core.MC flag = Core.MC.None)
         {
-            chats.Add(this.line + line);
+            chats.Add(new Tuple<string, int>(this.line + line, (int)flag));
             this.line = "";
         }
     }

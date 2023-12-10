@@ -10,6 +10,7 @@ namespace pp
         {
             Core.AddPlugin(new Quit());
             Core.AddPlugin(new Help());
+            Core.AddPlugin(new Download());
             Core.AddPlugin(new Game());
             Core.AddPlugin(new OpenAI());
         }

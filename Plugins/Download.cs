@@ -4,7 +4,7 @@ namespace pp.Plugins
     {
         public string GetDescription()
         {
-            return "Type /download <File> to download a plugin.";
+            return "Type /download <Plugin> to download a plugin.";
         }
 
         public bool ActivatesOn(string input)

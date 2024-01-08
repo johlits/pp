@@ -13,6 +13,7 @@ namespace pp
             Core.AddPlugin(new Download());
             Core.AddPlugin(new Game());
             Core.AddPlugin(new OpenAI());
+            Core.AddPlugin(new TimeZones());
         }
 
         public void AddInterfaces(object o) 
